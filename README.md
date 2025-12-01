@@ -1,6 +1,3 @@
-Here is your content converted into **clean, professional Markdown (.md)** format:
-
-````markdown
 # IMAGE FILTER PROGRAM  
 ### (PNG → PNG Serial Version)
 
@@ -105,11 +102,4 @@ Grayscale edge-detected PNG.
 
 ```bash
 ./image_filter input.png output_sharp.png sharpen
-```
-
----
-
-```
-
-If you want, I can also format it as a **README.md with a title, badges, table of contents, and code blocks**.
 ```
