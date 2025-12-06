@@ -15,7 +15,7 @@ static inline unsigned char clamp255(int v) {
     return (unsigned char)v;
 }
 
-// Convolution for RGB image
+// Laplacian+Sharpen filter
 void convolve_rgb(unsigned char *in, unsigned char *out,
                   int w, int h, int channels,
                   double *kernel, int ksize)
@@ -53,7 +53,7 @@ void convolve_rgb(unsigned char *in, unsigned char *out,
     }
 }
 
-// Convert to grayscale 1-channel
+// Used for Sobel
 unsigned char* to_grayscale(unsigned char *img, int w, int h, int ch) {
     unsigned char *g = malloc(w * h);
     for(int i=0;i<w*h;i++) {
@@ -108,7 +108,7 @@ void sobel(unsigned char *img, unsigned char *out, int w, int h, int ch)
     free(g);
 }
 
-// Gaussian kernel generator
+// Gaussian filter
 double* build_gaussian(int ksize, double sigma) {
     double *k = malloc(ksize * ksize * sizeof(double));
     int half = ksize/2;

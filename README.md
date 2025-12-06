@@ -40,17 +40,7 @@ image_filter
 
 ---
 
-## 3. Running the Program
-
-General format:
-
-```
-./image_filter input.png output.png filter_name [parameters]
-```
-
----
-
-## 4. Filter Usage Examples
+## 3. Filter Usage Examples
 
 ### (1) Sobel Edge Detection
 
