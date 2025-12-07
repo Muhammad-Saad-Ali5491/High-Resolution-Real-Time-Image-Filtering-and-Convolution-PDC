@@ -66,7 +66,7 @@ Grayscale edge-detected PNG.
 **Example:**
 
 ```bash
-./image_filter input.png blurred.png gaussian 5 1.0
+./image_filter input.png output_gaussian.png gaussian 5 1.0
 ```
 
 **Parameters**
@@ -81,7 +81,7 @@ Grayscale edge-detected PNG.
 **Command:**
 
 ```bash
-./image_filter input.png output_lap.png laplacian
+./image_filter input.png output_laplacian.png laplacian
 ```
 
 ---
@@ -91,5 +91,5 @@ Grayscale edge-detected PNG.
 **Command:**
 
 ```bash
-./image_filter input.png output_sharp.png sharpen
+./image_filter input.png output_sharpen.png sharpen
 ```
