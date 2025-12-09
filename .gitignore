@@ -1,0 +1,10 @@
+# Ignore all output images
+output_*.png
+
+# Ignore compiled binaries
+*.o
+*.out
+*.exe
+main
+image_filter_parallel
+image_filter_serial

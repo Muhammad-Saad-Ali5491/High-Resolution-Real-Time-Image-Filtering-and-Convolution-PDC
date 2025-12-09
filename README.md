@@ -29,7 +29,11 @@ https://github.com/nothings/stb
 Run the following command:
 
 ```bash
-gcc main.c -o image_filter -lm
+For Serial:
+gcc main.c -o image_filter_serial -lm
+
+For Parallel:
+gcc-15 main_parallel.c -o image_filter_parallel -fopenmp -lm
 ````
 
 This generates the executable:
@@ -47,7 +51,8 @@ image_filter
 **Command:**
 
 ```bash
-./image_filter input.png output_sobel.png sobel
+./image_filter_serial input.png output_sobel_serial.png sobel
+./image_filter_parallel input.png output_sobel_parallel.png sobel
 ```
 
 **Output:**
@@ -60,13 +65,8 @@ Grayscale edge-detected PNG.
 **Command:**
 
 ```bash
-./image_filter input.png output_blur.png gaussian <ksize> <sigma>
-```
-
-**Example:**
-
-```bash
-./image_filter input.png output_gaussian.png gaussian 5 1.0
+./image_filter_serial input.png output_gaussian_serial.png gaussian 5 1.0
+./image_filter_parallel input.png output_gaussian_parallel.png gaussian 5 1.0
 ```
 
 **Parameters**
@@ -81,7 +81,8 @@ Grayscale edge-detected PNG.
 **Command:**
 
 ```bash
-./image_filter input.png output_laplacian.png laplacian
+./image_filter_serial input.png output_laplacian_serial.png laplacian
+./image_filter_parallel input.png output_laplacian_parallel.png gaussian 5 1.0
 ```
 
 ---
@@ -91,5 +92,6 @@ Grayscale edge-detected PNG.
 **Command:**
 
 ```bash
-./image_filter input.png output_sharpen.png sharpen
+./image_filter_serial input.png output_sharpen_serial.png sharpen
+./image_filter_parallel input.png output_sharpen_parallel.png gaussian 5 1.0
 ```
