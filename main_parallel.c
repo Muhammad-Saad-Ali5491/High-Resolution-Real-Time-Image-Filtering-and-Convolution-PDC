@@ -1,4 +1,3 @@
-
 #define STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 
@@ -101,7 +100,6 @@ void sobel(unsigned char *img, unsigned char *out, int w, int h, int ch)
             int mag = (int)sqrt(sx*sx + sy*sy);
             if(mag > 255) mag = 255;
 
-            // write as grayscale PNG (all channels equal)
             for(int c=0;c<ch;c++)
                 out[(y*w + x)*ch + c] = (unsigned char)mag;
         }
@@ -123,8 +121,9 @@ double* build_gaussian(int ksize, double sigma) {
             sum += v;
         }
     }
-    // Normalize
-    for(int i=0;i<ksize*ksize;i++) k[i] /= sum;
+
+    for(int i=0;i<ksize*ksize;i++)
+        k[i] /= sum;
 
     return k;
 }
@@ -148,8 +147,11 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    ch = 3; // force RGB
-    unsigned char *out = malloc(w*h*ch);
+    ch = 3;
+    unsigned char *out = malloc(w * h * ch);
+
+    /* ----------- START TIMER ----------- */
+    double start = omp_get_wtime();
 
     if(strcmp(mode,"sobel")==0) {
         sobel(img, out, w, h, ch);
@@ -183,8 +185,12 @@ int main(int argc, char **argv)
         return 1;
     }
 
-    // Write PNG
-    stbi_write_png(outfile, w, h, ch, out, w*ch);
+    /* ----------- END TIMER ----------- */
+    double end = omp_get_wtime();
+
+    printf("Execution time: %.6f seconds\n", end - start);
+
+    stbi_write_png(outfile, w, h, ch, out, w * ch);
 
     free(img);
     free(out);

@@ -1,97 +1,196 @@
-# IMAGE FILTER PROGRAM  
-### (PNG → PNG Serial Version)
+# 🖼️ Image Filter Program
 
-This program reads an input PNG image, applies a selected filter, and saves the output as a new PNG file.
-
----
-
-## Supported Filters
-- **sobel**
-- **gaussian**
-- **laplacian**
-- **sharpen**
+> **High-Resolution Real-Time Image Filtering and Convolution**  
+> PNG → PNG conversion with multiple filter options
 
 ---
 
-## 1. Requirements
-- `main.c`  
-- `stb_image.h`  
-- `stb_image_write.h`  
-- GCC compiler  
+## 📋 Overview
 
-Download **stb** headers from:  
-https://github.com/nothings/stb
+This program reads an input PNG image, applies a selected filter, and saves the output as a new PNG file. It supports both **serial** and **parallel** execution modes for optimal performance.
 
 ---
 
-## 2. Compilation
+## ✨ Supported Filters
 
-Run the following command:
+| Filter | Description |
+|--------|-------------|
+| **sobel** | Edge detection filter |
+| **gaussian** | Blur filter with configurable kernel size and sigma |
+| **laplacian** | Edge enhancement filter |
+| **sharpen** | Image sharpening filter |
 
+---
+
+## 📦 Requirements
+
+- `main.c`
+- `stb_image.h`
+- `stb_image_write.h`
+- GCC compiler
+
+### Download STB Headers
+
+Get the **stb** headers from:  
+🔗 [https://github.com/nothings/stb](https://github.com/nothings/stb)
+
+---
+
+## 🔨 Compilation
+
+### Serial Version
 ```bash
-For Serial:
 gcc main.c -o image_filter_serial -lm
+```
 
-For Parallel:
+### Parallel Version
+```bash
 gcc-15 main_parallel.c -o image_filter_parallel -fopenmp -lm
-````
-
-This generates the executable:
-
 ```
-image_filter
-```
+
+This generates the executables:
+- `image_filter_serial`
+- `image_filter_parallel`
 
 ---
 
-## 3. Filter Usage Examples
+## 🚀 Filter Usage Examples
 
-### (1) Sobel Edge Detection
+### 1️⃣ Sobel Edge Detection
+
+Applies edge detection to create a grayscale edge-detected PNG.
 
 **Command:**
-
 ```bash
+# Serial
 ./image_filter_serial input.png output_sobel_serial.png sobel
+
+# Parallel
 ./image_filter_parallel input.png output_sobel_parallel.png sobel
 ```
 
 **Output:**
-Grayscale edge-detected PNG.
+```
+Serial Execution time: 0.016043 seconds
+```
 
 ---
 
-### (2) Gaussian Blur
+### 2️⃣ Gaussian Blur
+
+Applies blur effect with configurable parameters.
 
 **Command:**
-
 ```bash
+# Serial
 ./image_filter_serial input.png output_gaussian_serial.png gaussian 5 1.0
+
+# Parallel
 ./image_filter_parallel input.png output_gaussian_parallel.png gaussian 5 1.0
 ```
 
-**Parameters**
+**Parameters:**
+- `ksize` → Kernel size (odd integer: 3, 5, 7, …)
+- `sigma` → Blur strength (e.g., 0.8, 1.0, 1.5, …)
 
-* `ksize` → odd integer (3, 5, 7, …)
-* `sigma` → blur strength (0.8, 1.0, 1.5, …)
+**Output:**
+```
+Serial Execution time: 0.055719 seconds
+```
 
 ---
 
-### (3) Laplacian Edge Filter
+### 3️⃣ Laplacian Edge Filter
+
+Applies Laplacian edge enhancement.
 
 **Command:**
-
 ```bash
+# Serial
 ./image_filter_serial input.png output_laplacian_serial.png laplacian
-./image_filter_parallel input.png output_laplacian_parallel.png gaussian 5 1.0
+
+# Parallel
+./image_filter_parallel input.png output_laplacian_parallel.png laplacian
+```
+
+**Output:**
+```
+Serial Execution time: 0.053983 seconds
 ```
 
 ---
 
-### (4) Sharpen Filter
+### 4️⃣ Sharpen Filter
+
+Enhances image sharpness.
 
 **Command:**
+```bash
+# Serial
+./image_filter_serial input.png output_sharpen_serial.png sharpen
+
+# Parallel
+./image_filter_parallel input.png output_sharpen_parallel.png sharpen
+```
+
+**Output:**
+```
+Serial Execution time: 0.054240 seconds
+```
+
+---
+
+## ⚡ Performance Benchmarks
+
+Example Serial execution times on Mac (input.png):
+
+| Filter | Execution Time |
+|--------|----------------|
+| Sobel | 0.016043s |
+| Gaussian | 0.055719s |
+| Laplacian | 0.053983s |
+| Sharpen | 0.054240s |
+
+---
+
+## 📝 General Usage Pattern
 
 ```bash
-./image_filter_serial input.png output_sharpen_serial.png sharpen
-./image_filter_parallel input.png output_sharpen_parallel.png gaussian 5 1.0
+./image_filter_[serial|parallel] <input.png> <output.png> <filter> [parameters]
 ```
+
+**Arguments:**
+- `input.png` - Source image file
+- `output.png` - Destination image file
+- `filter` - Filter type (sobel, gaussian, laplacian, sharpen)
+- `[parameters]` - Optional filter-specific parameters (e.g., ksize and sigma for gaussian)
+
+---
+
+## 🎯 Example Workflow
+
+```bash
+# Compile both versions
+gcc main.c -o image_filter_serial -lm
+gcc-15 main_parallel.c -o image_filter_parallel -fopenmp -lm
+
+# Run filters
+./image_filter_parallel input.png output_sobel_parallel.png sobel
+./image_filter_parallel input.png output_gaussian_parallel.png gaussian 5 1.0
+./image_filter_parallel input.png output_laplacian_parallel.png laplacian
+./image_filter_parallel input.png output_sharpen_parallel.png sharpen
+```
+
+---
+
+## 📄 License
+
+This project uses the STB library headers which are public domain.
+
+---
+
+## 👤 Author
+
+**saffisardar and saadali**
+
+---
