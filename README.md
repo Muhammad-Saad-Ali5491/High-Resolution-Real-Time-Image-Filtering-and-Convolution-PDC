@@ -116,9 +116,8 @@ Enhances image sharpness.
 
 ## ⚡ Performance Benchmarks
 
-execution times on Mac:
 
-| Filter | Execution Time |
+| Filter | Serial Execution Time |
 |--------|----------------|
 | Sobel | 0.016043s |
 | Gaussian | 0.055719s |
