@@ -8,3 +8,4 @@ output_*.png
 main
 image_filter_parallel
 image_filter_serial
+.vscode
