@@ -639,6 +639,20 @@ Once all steps are complete, you should see:
 
 ---
 
+# 💻 Hardware Specifications
+
+```
+Total Cores:        10
+├── P-Cores:        4 @ 4.4 GHz
+└── E-Cores:        6 @ 2.8 GHz
+
+Cache:              16 MB L2 (shared)
+Memory:             16 GB Unified
+Bandwidth:          120 GB/s
+```
+
+---
+
 ## 👤 Author
 
 **saffisardar and saadali**
