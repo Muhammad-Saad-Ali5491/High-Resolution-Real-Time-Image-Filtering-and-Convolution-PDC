@@ -60,7 +60,7 @@ Applies edge detection to create a grayscale edge-detected PNG.
 ./image_filter_serial input.png output_sobel_serial.png sobel
 
 # Parallel
-./image_filter_parallel input.png output_sobel_parallel.png sobel
+./image_filter_parallel input.png output_sobel_parallel.png [X] sobel
 ```
 
 ---
@@ -75,7 +75,7 @@ Applies blur effect with configurable parameters.
 ./image_filter_serial input.png output_gaussian_serial.png gaussian 5 1.0
 
 # Parallel
-./image_filter_parallel input.png output_gaussian_parallel.png gaussian 5 1.0
+./image_filter_parallel input.png output_gaussian_parallel.png [X] gaussian 5 1.0
 ```
 
 **Parameters:**
@@ -94,7 +94,7 @@ Applies Laplacian edge enhancement.
 ./image_filter_serial input.png output_laplacian_serial.png laplacian
 
 # Parallel
-./image_filter_parallel input.png output_laplacian_parallel.png laplacian
+./image_filter_parallel input.png output_laplacian_parallel.png [X] laplacian
 ```
 
 ---
@@ -109,7 +109,7 @@ Enhances image sharpness.
 ./image_filter_serial input.png output_sharpen_serial.png sharpen
 
 # Parallel
-./image_filter_parallel input.png output_sharpen_parallel.png sharpen
+./image_filter_parallel input.png output_sharpen_parallel.png [X] sharpen
 ```
 
 ---

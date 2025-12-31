@@ -130,14 +130,16 @@ double* build_gaussian(int ksize, double sigma) {
 
 int main(int argc, char **argv)
 {
-    if(argc < 4) {
-        printf("Usage: %s input.png output.png [sobel|gaussian|laplacian|sharpen] [params]\n", argv[0]);
+    if(argc < 5) {
+        printf("Usage: %s input.png output.png [thread_count] [sobel|gaussian|laplacian|sharpen] [params]\n", argv[0]);
         return 1;
     }
 
+    //argv[0] is standard command keyword
     char *infile = argv[1];
     char *outfile = argv[2];
-    char *mode = argv[3];
+    int thread_count = strtol(argv[3], NULL, 10); omp_set_num_threads(thread_count);
+    char *mode = argv[4];
 
     int w, h, ch;
 
@@ -157,12 +159,12 @@ int main(int argc, char **argv)
         sobel(img, out, w, h, ch);
     }
     else if(strcmp(mode,"gaussian")==0) {
-        if(argc < 6) {
+        if(argc < 7) {
             printf("Usage: gaussian ksize sigma\n");
             return 1;
         }
-        int ksize = atoi(argv[4]);
-        double sigma = atof(argv[5]);
+        int ksize = atoi(argv[5]);
+        double sigma = atof(argv[6]);
 
         double *g = build_gaussian(ksize, sigma);
         convolve_rgb(img, out, w, h, ch, g, ksize);
