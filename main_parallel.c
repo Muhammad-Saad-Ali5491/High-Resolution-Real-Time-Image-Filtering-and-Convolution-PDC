@@ -21,42 +21,42 @@ void convolve_rgb(unsigned char *in, unsigned char *out,
                   int w, int h, int channels,
                   double *kernel, int ksize)
 {
-    int half = ksize / 2;
+int half = ksize / 2;
 
-    for(int y = 0; y < h; y++) {
-        for(int x = 0; x < w; x++) {
-            for(int c = 0; c < channels; c++) {
+#pragma omp parallel for collapse(2) schedule(guided)
+for(int y = 0; y < h; y++) {
+    for(int x = 0; x < w; x++) {
+        for(int c = 0; c < channels; c++) {
+            double acc = 0.0;  
 
-                double acc = 0.0;
+            for(int ky = -half; ky <= half; ky++) {
+                for(int kx = -half; kx <= half; kx++) {
+                    int xx = x + kx;
+                    int yy = y + ky;
 
-                for(int ky = -half; ky <= half; ky++) {
-                    for(int kx = -half; kx <= half; kx++) {
 
-                        int xx = x + kx;
-                        int yy = y + ky;
+                    if(xx < 0) xx = 0;
+                    if(xx >= w) xx = w-1;
+                    if(yy < 0) yy = 0;
+                    if(yy >= h) yy = h-1;
 
-                        if(xx < 0) xx = 0;
-                        if(xx >= w) xx = w-1;
-                        if(yy < 0) yy = 0;
-                        if(yy >= h) yy = h-1;
+                    int idx = (yy * w + xx) * channels + c;
+                    int kidx = (ky + half)*ksize + (kx + half);
 
-                        int idx = (yy * w + xx) * channels + c;
-                        int kidx = (ky + half)*ksize + (kx + half);
-
-                        acc += in[idx] * kernel[kidx];
-                    }
+                    acc += in[idx] * kernel[kidx];
                 }
-
-                int out_index = (y * w + x) * channels + c;
-                out[out_index] = clamp255((int)acc);
             }
+            int out_index = (y * w + x) * channels + c;
+            out[out_index] = clamp255((int)acc); 
         }
     }
+}
 }
 
 // Used for Sobel
 unsigned char* to_grayscale(unsigned char *img, int w, int h, int ch) {
     unsigned char *g = malloc(w * h);
+    #pragma omp parallel for default(none) shared(img,w,h,g,ch) 
     for(int i=0;i<w*h;i++) {
         int r = img[i*ch + 0];
         int g1 = img[i*ch + 1];
@@ -75,6 +75,7 @@ void sobel(unsigned char *img, unsigned char *out, int w, int h, int ch)
     int gx[9] = {-1,0,1,-2,0,2,-1,0,1};
     int gy[9] = {-1,-2,-1,0,0,0,1,2,1};
 
+    #pragma omp parallel for collapse(2) default(none) shared(g,out,w,h,ch,gx,gy)
     for(int y=0; y<h; y++) {
         for(int x=0; x<w; x++) {
             double sx=0, sy=0;
@@ -110,22 +111,22 @@ void sobel(unsigned char *img, unsigned char *out, int w, int h, int ch)
 
 // Gaussian filter
 double* build_gaussian(int ksize, double sigma) {
-    double *k = malloc(ksize * ksize * sizeof(double));
-    int half = ksize/2;
-    double sum = 0.0;
-
-    for(int y=-half;y<=half;y++){
-        for(int x=-half;x<=half;x++){
-            double v = exp(-(x*x + y*y)/(2*sigma*sigma));
-            k[(y+half)*ksize + (x+half)] = v;
-            sum += v;
-        }
+double *k = malloc(ksize * ksize * sizeof(double));
+int half = ksize/2;
+double sum = 0.0;
+#pragma omp parallel for collapse(2) reduction(+:sum) shared(k,half,ksize,sigma)
+for(int y=-half; y<=half; y++){
+    for(int x=-half; x<=half; x++){
+        double v = exp(-(x*x + y*y)/(2*sigma*sigma));
+        k[(y+half)*ksize + (x+half)] = v;
+        sum += v;
     }
-
-    for(int i=0;i<ksize*ksize;i++)
-        k[i] /= sum;
-
-    return k;
+}
+#pragma omp parallel for shared(k,ksize,sum)
+for(int i=0; i<ksize*ksize; i++) {
+    k[i] /= sum;
+}
+return k;
 }
 
 int main(int argc, char **argv)

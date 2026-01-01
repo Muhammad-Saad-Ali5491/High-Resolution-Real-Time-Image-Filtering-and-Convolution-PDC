@@ -124,6 +124,16 @@ Enhances image sharpness.
 | Laplacian | 0.053983s |
 | Sharpen | 0.054240s |
 
+
+| Filter | Parallel Execution Time |
+|--------|----------------|
+| Sobel | 0.002268s |
+| Gaussian | 0.010814s |
+| Laplacian | 0.004109s |
+| Sharpen | 0.004169s |
+
+
+
 ---
 
 ## 📝 General Usage Pattern
