@@ -40,12 +40,17 @@ Get the **stb** headers from:
 
 ### Serial Version
 ```bash
-gcc main.c -o image_filter_serial -lm
+gcc main.c -o image_filter_serial -fopenmp -lm
 ```
 
 ### Parallel Version
+*For Mac*
 ```bash
 gcc-15 main_parallel.c -o image_filter_parallel -fopenmp -lm
+```
+*For Window*
+```bash
+gcc main_parallel.c -o image_filter_parallel -fopenmp -lm
 ```
 
 ## 🚀 Filter Usage 

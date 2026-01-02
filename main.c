@@ -4,6 +4,7 @@
 #include "stb_image.h"
 #include "stb_image_write.h"
 
+#include <omp.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -140,6 +141,7 @@ int main(int argc, char **argv)
 
     int w, h, ch;
 
+    double start = omp_get_wtime();
     unsigned char *img = stbi_load(infile, &w, &h, &ch, 3);
     if(!img) {
         printf("Error loading image.\n");
@@ -180,6 +182,10 @@ int main(int argc, char **argv)
         printf("Unknown mode.\n");
         return 1;
     }
+     /* ----------- END TIMER ----------- */
+    double end = omp_get_wtime();
+
+    printf("Execution time: %.6f seconds\n", end - start);
 
     // Write PNG
     stbi_write_png(outfile, w, h, ch, out, w*ch);
