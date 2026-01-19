@@ -105,6 +105,10 @@ mpirun -np <processes> ./mpi_filter <input.png> <output.png> <filter> [parameter
 ```bash
 mpirun -np 4 ./mpi_filter input.png output_sobel.png sobel
 ```
+**Windows**
+```cmd
+mpiexec -n 4 main_distributed.exe input.png output_sobel.png sobel
+---
 
 ---
 
@@ -128,6 +132,10 @@ mpirun -np 4 ./mpi_filter input.png output_sobel.png sobel
 ```bash
 mpirun -np 4 ./mpi_filter input.png output_gaussian.png gaussian 5 1.0
 ```
+**Windows**
+```cmd
+mpiexec -n 4 main_distributed.exe input.png output_gaussian.png gaussian 5 1.0
+```
 
 ---
 
@@ -146,6 +154,10 @@ mpirun -np 4 ./mpi_filter input.png output_gaussian.png gaussian 5 1.0
 **MPI (4 processes):**
 ```bash
 mpirun -np 4 ./mpi_filter input.png output_laplacian.png laplacian
+```
+**Windows**
+```cmd
+mpiexec -n 4 main_distributed.exe input.png output_laplacian.png laplacian
 ```
 
 ---
@@ -166,7 +178,9 @@ mpirun -np 4 ./mpi_filter input.png output_laplacian.png laplacian
 ```bash
 mpirun -np 4 ./mpi_filter input.png output_sharpen.png sharpen
 ```
-
+**Windows**
+```cmd
+mpiexec -n 4 main_distributed.exe input.png output_sharpen.png sharpen
 ---
 
 
