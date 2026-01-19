@@ -13,3 +13,5 @@ gcc src/app.c -o build/app_runner.exe
 gcc src/main.c -o build/image_filter_serial -fopenmp -lm
 gcc src/main_parallel.c -o build/image_filter_parallel -fopenmp -lm
 
+to create mpi_filter in wondows open file the in vscode goto terminal->run build task after that rename the file 
+main_distributed.exe => mpi_filter.exe 
