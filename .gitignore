@@ -11,3 +11,6 @@ image_filter_serial
 .vscode
 serial\output_gaussian_8k.png
 CCP_PDC- report.pdf
+build
+output
+performance_report.txt

@@ -1,40 +1,40 @@
 Image Filtering Performance Report
 
 Image: ../input_images/input1.png
-Serial - sobel: 0.586100 s
-Parallel - sobel: 0.579968 s
-Distributed - sobel: 0.661228 s
+Serial - sobel: 0.129372 s
+Parallel - sobel: 0.130349 s
+Distributed - sobel: 0.353019 s
 
-Serial - gaussian: 0.061014 s
-Parallel - gaussian: 0.038489 s
-Distributed - gaussian: 0.115268 s
+Serial - gaussian: 0.288021 s
+Parallel - gaussian: 0.179131 s
+Distributed - gaussian: 0.351407 s
 
-Serial - laplacian: 0.040943 s
-Parallel - laplacian: 0.030630 s
-Distributed - laplacian: 0.103310 s
+Serial - laplacian: 0.225829 s
+Parallel - laplacian: 0.162414 s
+Distributed - laplacian: 0.340907 s
 
-Serial - sharpen: 0.041463 s
-Parallel - sharpen: 0.032532 s
-Distributed - sharpen: 0.100117 s
+Serial - sharpen: 0.205891 s
+Parallel - sharpen: 0.150876 s
+Distributed - sharpen: 0.306490 s
 
 -------------------------------------
 
 Image: ../input_images/input2_8k.png
-Serial - sobel: 11.443629 s
-Parallel - sobel: 10.638478 s
-Distributed - sobel: 11.351510 s
+Serial - sobel: 34.613575 s
+Parallel - sobel: 30.578407 s
+Distributed - sobel: 34.503455 s
 
-Serial - gaussian: 21.511325 s
-Parallel - gaussian: 15.288818 s
-Distributed - gaussian: 16.733747 s
+Serial - gaussian: 55.134037 s
+Parallel - gaussian: 39.914681 s
+Distributed - gaussian: 54.889109 s
 
-Serial - laplacian: 14.631989 s
-Parallel - laplacian: 11.844157 s
-Distributed - laplacian: 13.037895 s
+Serial - laplacian: 45.858425 s
+Parallel - laplacian: 45.034790 s
+Distributed - laplacian: 41.807145 s
 
-Serial - sharpen: 15.308721 s
-Parallel - sharpen: 12.760738 s
-Distributed - sharpen: 13.379512 s
+Serial - sharpen: 43.165901 s
+Parallel - sharpen: 33.040133 s
+Distributed - sharpen: 27.440015 s
 
 -------------------------------------
 
